@@ -1,0 +1,57 @@
+DROP DATABASE IF EXISTS kodland;
+CREATE DATABASE IF NOT EXISTS kodland;
+USE kodland;
+
+-- Tabella utenti
+CREATE TABLE Utente (
+                        ID INT AUTO_INCREMENT PRIMARY KEY,
+                        nickname VARCHAR(50) NOT NULL UNIQUE,
+                        email VARCHAR(50) NOT NULL UNIQUE,
+                        password VARCHAR(255) NOT NULL,
+                        punteggio_totale INT DEFAULT 0,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Tabella quiz
+CREATE TABLE Quiz (
+                      ID INT AUTO_INCREMENT PRIMARY KEY,
+                      titolo VARCHAR(50) NOT NULL,
+                      argomento VARCHAR(50) NOT NULL
+);
+
+-- Tabella risposte
+CREATE TABLE Risposta (
+                          ID INT AUTO_INCREMENT PRIMARY KEY,
+                          testo VARCHAR(500) NOT NULL,
+                          giusta BOOLEAN NOT NULL
+);
+
+-- Tabella domanda
+CREATE TABLE Domanda (
+                         ID INT AUTO_INCREMENT PRIMARY KEY,
+                         testo VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE Compilazione (
+                              utente INT NOT NULL,
+                              quiz INT NOT NULL,
+                              punteggio INT DEFAULT 0,
+                              PRIMARY KEY (utente, quiz),
+                              FOREIGN KEY (utente) REFERENCES Utente(ID) ON DELETE CASCADE,
+                              FOREIGN KEY (quiz) REFERENCES Quiz(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Composizione_Quiz (
+                                   quiz INT NOT NULL,
+                                   domanda INT NOT NULL,
+                                   PRIMARY KEY (quiz, domanda),
+                                   FOREIGN KEY (quiz) REFERENCES Quiz(ID) ON DELETE CASCADE,
+                                   FOREIGN KEY (domanda) REFERENCES Domanda(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Composizione_Domanda (
+                                      domanda INT NOT NULL,
+                                      risposta INT NOT NULL,
+                                      PRIMARY KEY (domanda, risposta),
+                                      FOREIGN KEY (domanda) REFERENCES Domanda(ID) ON DELETE CASCADE,
+                                      FOREIGN KEY (risposta) REFERENCES Risposta(ID) ON DELETE CASCADE
+);

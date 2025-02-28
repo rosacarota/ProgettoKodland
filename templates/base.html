@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Quiz AI{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (icone) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom_fonts.css') }}">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Progetto Kodland</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if session["user_id"] %}
+                <!-- Quando l'utente è loggato -->
+                <li class="nav-item">
+                    <span class="navbar-text text-white me-3">👤 {{ session["nickname"] }}</span>
+                </li>
+                <!-- Bottone "Quiz" spostato prima del "Logout" -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="/quiz">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white" href="/logout">Logout</a>
+                </li>
+                {% else %}
+                <!-- Quando l'utente non è loggato -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success text-white me-2" href="/registrazione">Registrazione</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="/login">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenuto dinamico delle pagine -->
+<div class="container mt-4">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-4 mt-auto">
+    <div class="container">
+        <p class="mb-1">&copy; 2025 Rosa Carotenuto</p>
+        <p class="mb-1">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:r.carotenuto.01@gmail.com" class="text-light text-decoration-none"> r.carotenuto.01@gmail.com</a>
+        </p>
+        <p class="mb-0">
+            <i class="fas fa-phone"></i>
+            <a href="tel:+393486634951" class="text-light text-decoration-none"> +39 348 663 4951</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/weather.js') }}"></script>
+</body>
+</html>

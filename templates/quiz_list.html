@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Lista Quiz - Progetto Kodland{% endblock %}
+
+{% block content %}
+<style>
+    /* Stile generale */
+    body {
+        background-color: white;
+        color: #0c6cfb;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .quiz-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #0c6cfb;
+        text-shadow: 2px 2px 0px white;
+    }
+
+    .table-container {
+        margin-top: 20px;
+    }
+
+    /* Stile tabella */
+    .table {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table thead {
+        background-color: #0c6cfb;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* Bottone migliorato */
+    .btn-partecipa {
+        background-color: #0c6cfb;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+
+    .btn-partecipa:hover {
+        background-color: white;
+        color: #0c6cfb;
+        border: 2px solid #0c6cfb;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="quiz-container">
+    <h2 class="quiz-title">📋 Lista dei Quiz</h2>
+
+    {% if quiz %}
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Argomento</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for q in quiz %}
+            <tr>
+                <td>{{ q.titolo }}</td>
+                <td>{{ q.argomento }}</td>
+                <td>
+                    <a href="{{ url_for('quiz.start_quiz', quiz_id=q.ID) }}" class="btn btn-partecipa">Partecipa</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-muted mt-4">Non ci sono quiz disponibili al momento.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Congratulazioni!{% endblock %}
+
+{% block content %}
+<style>
+  /* Stile generale */
+  body {
+    background-color: white;
+    color: #0c6cfb;
+  }
+
+  .fun-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    color: #0c6cfb;
+    text-shadow: 2px 2px 0px white;
+  }
+
+  .fun-subtitle {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: #08C2FF;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  /* Sezione principale */
+  .congratulations-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    max-width: 750px; /* Aumenta la larghezza massima della card */
+  }
+
+  /* Badge punteggio */
+  .score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .score-badge {
+    font-size: 1.5rem;
+    padding: 12px 25px;
+    border-radius: 10px;
+  }
+
+  /* Pulsante di ritorno */
+  .btn-main {
+    background-color: #0c6cfb;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    transition: 0.3s;
+  }
+
+  .btn-main:hover {
+    background-color: white;
+    color: #0c6cfb;
+    border: 2px solid #0c6cfb;
+    transform: scale(1.1);
+  }
+
+  /* Classifica */
+  .leaderboard-container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+  }
+
+  .leaderboard-title {
+    color: #0c6cfb;
+    font-weight: bold;
+  }
+
+  .table thead {
+    background-color: #0c6cfb;
+    color: white;
+  }
+</style>
+
+<!-- Messaggio di congratulazioni -->
+<div class="container congratulations-container mt-5">
+  <h1 class="fun-title">🎉 Congratulazioni! 🎉</h1>
+  <p class="fun-subtitle">Hai completato il quiz con successo.</p>
+
+  <h2 class="text-primary mt-4">Punteggio ottenuto:</h2>
+  <span class="badge bg-primary score-badge">{{ quiz_score }}</span>
+
+  <h3 class="text-secondary mt-3">Punteggio totale:</h3>
+  <div class="score-container">
+    <span class="badge bg-secondary score-badge">{{ total_score }}</span>
+  </div>
+
+  <a href="{{ url_for('quiz.quiz_list') }}" class="btn btn-main mt-4">🔄 Torna alla lista dei quiz</a>
+</div>
+
+<!-- Classifica sotto le congratulazioni -->
+<div class="container leaderboard-container">
+  <h2 class="leaderboard-title text-center">🏆 Classifica Top 10 🏆</h2>
+  {% if top_users %}
+  <table class="table table-striped mt-4">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>👤 Nickname</th>
+      <th>⭐ Punteggio Totale</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in top_users %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ user.nickname }}</td>
+      <td>{{ user.punteggio_totale }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted mt-4">Nessun utente in classifica.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

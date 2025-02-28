@@ -1,0 +1,50 @@
+/* Stile generale per mantenere il footer in basso */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Fa espandere il contenuto senza far salire il footer */
+}
+
+/* Navbar */
+.navbar {
+    height: auto !important; /* Evita che si espanda */
+    padding: 10px 15px;
+    background-color: #212529; /* Colore scuro */
+}
+
+/* Allineamento corretto del nome utente */
+.navbar-text {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.navbar-text i {
+    font-size: 18px; /* Regola la grandezza dell'icona */
+    margin-right: 5px; /* Spazio tra icona e nickname */
+}
+
+/* Footer fisso in fondo */
+.footer-fixed {
+    margin-top: auto;
+    width: 100%;
+    background-color: #212529;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-fixed a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-fixed a:hover {
+    text-decoration: underline;
+}
+
+

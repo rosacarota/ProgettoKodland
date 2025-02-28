@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz - Progetto Kodland{% endblock %}
+
+{% block content %}
+<style>
+    /* Stile per il titolo */
+    .fun-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: #0c6cfb;
+        text-shadow: 2px 2px 0px white;
+        margin-bottom: 30px;
+    }
+
+    /* Stile del contenitore principale del quiz */
+    .quiz-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Contenitore del carosello */
+    #quiz-carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    /* Stile della "cartella" delle domande */
+    .quiz-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Stile delle risposte */
+    .list-group-item {
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .list-group-item:hover {
+        background-color: #08C2FF;
+        color: white;
+    }
+
+    .list-group-item.active {
+        background-color: #0c6cfb !important;
+        color: white !important;
+    }
+
+    /* Controlli per il carosello */
+    .quiz-controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    /* Stile del bottone "Termina Quiz" */
+    .quiz-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px; /* Aumenta la distanza dal contenuto */
+        margin-bottom: 50px; /* Aggiunge spazio prima del footer */
+    }
+
+    /* Stile pulsanti del carosello */
+    .btn-secondary {
+        background-color: #0c6cfb;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #08C2FF;
+        transform: scale(1.1);
+    }
+
+    /* Stile pulsante Termina Quiz */
+    .quiz-footer .btn-danger {
+        background-color: #dc3545; /* Colore di base */
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .quiz-footer .btn-danger:hover {
+        background-color: #c82333;
+        transform: scale(1.1);
+    }
+
+</style>
+
+<div class="container quiz-container mt-5">
+    <h2 class="fun-title">Quiz in Corso</h2>
+
+    <!-- Contenitore del carosello -->
+    <div id="quiz-carousel">
+        <div id="quiz-card" class="quiz-card">
+            <h4 id="question-title"></h4>
+            <ul id="answer-list" class="list-group mt-3"></ul>
+        </div>
+    </div>
+
+    <!-- Controlli per il carosello -->
+    <div class="quiz-controls">
+        <button id="prev-btn" class="btn btn-secondary">⬅ Precedente</button>
+        <button id="next-btn" class="btn btn-secondary">Successiva ➡</button>
+    </div>
+
+    <!-- Bottone Termina Quiz -->
+    <div class="quiz-footer">
+        <button id="end-quiz-btn" class="btn btn-danger">Termina Quiz</button>
+    </div>
+</div>
+
+<!-- Includiamo il file JavaScript -->
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+
+{% endblock %}

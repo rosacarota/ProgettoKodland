@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Progetto Kodland{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Accedi a Progetto Kodland</h2>
+
+  <!-- Mostra messaggio di errore se le credenziali sono sbagliate -->
+  {% if error %}
+  <div class="alert alert-danger text-center">
+    {{ error }}
+  </div>
+  {% endif %}
+
+  <form method="POST" class="mx-auto p-4 shadow-lg bg-white rounded" style="max-width: 400px;">
+    <div class="mb-3">
+      <label class="form-label">Login</label>
+      <input type="email" name="email" class="form-control" required placeholder="Inserisci la tua email">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" required placeholder="Inserisci la password">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+    <div class="text-center mt-3">
+      <a href="{{ url_for('registrazione.registrazione') }}" class="text-decoration-none">Non hai un account? Registrati</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
